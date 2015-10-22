@@ -40,7 +40,7 @@ else
     --hostname="$HOSTNAME-$APPNAME" \
     --env-file=$ENV_FILE \
     --name=$APPNAME \
-    --add-host=hostmachine:${HOSTIP} --rm -it debian \
+    --add-host=hostmachine:$HOSTIP --rm -it debian \
     meteorhacks/meteord:base
 fi
 
