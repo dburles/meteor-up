@@ -31,6 +31,8 @@ if [ "$USE_LOCAL_MONGO" == "1" ]; then
     --name=$APPNAME \
     meteorhacks/meteord:base
 else
+  HOSTIP=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$2}' | cut -d / -f 1`
+
   docker run \
     -d \
     --restart=always \
@@ -39,6 +41,7 @@ else
     --hostname="$HOSTNAME-$APPNAME" \
     --env-file=$ENV_FILE \
     --name=$APPNAME \
+    --add-host=hostmachine:${HOSTIP} --rm -it debian \
     meteorhacks/meteord:base
 fi
 
